@@ -273,7 +273,7 @@ or like following,
 ]
 ```
 
-#### curl command
+#### Curl command
 ``` 
 curl -X POST "base-url/get-fuel-consumption-statistics" -H "accept: */*" -H "Content-Type: application/json" -d "{}"
 
