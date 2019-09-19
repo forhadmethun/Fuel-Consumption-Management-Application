@@ -161,7 +161,7 @@ public class RegistrationUtility {
 
     public static RegistrationEntity getRegistrationEntityFromRegistrationDTO(RegistrationDTO registrationDTO){
         return new RegistrationEntity(
-                0,
+                0L,
                 registrationDTO.getFuelType(),
                 registrationDTO.getPricePerLiter(),
                 registrationDTO.getVolume(),

@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class RegistrationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String fuelType;
     private Double pricePerLiter;

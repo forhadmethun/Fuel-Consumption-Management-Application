@@ -19,21 +19,18 @@ public class RESTController {
     public Map<String, String> createFuelRegistration(@RequestBody List<RegistrationDTO> registrationDTOS) {
         return registrationService.createFuelRegistration(registrationDTOS);
     }
-
     @RequestMapping(value = "/get-total-spent-amount", method = RequestMethod.POST)
     public Object getTotalSpentAmount(
             @ApiParam(value=RegistrationUtility.GET_TOTAL_SPENT_AMOUNT_API_REQUEST, required = true)
             @RequestBody JSONObject data) {
         return registrationService.getTotalSpentAmount(data);
     }
-
     @RequestMapping(value = "/get-fuel-consumption-record", method = RequestMethod.POST)
     public Object getFuelConsumptionRecord(
             @ApiParam(value = RegistrationUtility.GET_SPECIFIED_MONTH_FUEL_CONSUMPTION_API_REQUEST, required = true)
             @RequestBody JSONObject data) {
         return registrationService.getFuelConsumptionRecord(data);
     }
-
     @RequestMapping(value = "/get-fuel-consumption-statistics", method = RequestMethod.POST)
     public Object getFuelConsumptionStatistics(
             @ApiParam(value = RegistrationUtility.GET_FUEL_CONSUMPTION_STAT_API_REQUEST, required = true)
@@ -41,17 +38,8 @@ public class RESTController {
         return registrationService.getFuelConsumptionStatistics(data);
     }
 
-
     @RequestMapping(value = "/get-all-fuel-registration-data", method = RequestMethod.GET)
     public List<RegistrationDTO> getAllFuelRegistrationData() {
         return registrationService.getAllFuelRegistrationData();
     }
-
-
-
-
-
-
-
-
 }
