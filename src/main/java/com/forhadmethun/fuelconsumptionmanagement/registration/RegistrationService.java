@@ -86,20 +86,42 @@ public class RegistrationService {
 
         Integer givenYear = (Integer) data.get("year");
         Integer givenMonth = (Integer) data.get("month");
+        String driverId = (String) data.get("driverId");
 
         List<RegistrationEntity> registrationEntityList = null;
-        if (givenMonth == null && givenYear == null) {
-            registrationEntityList = registrationRepository.findAll();
-        } else if (givenMonth != null && givenYear != null) {
-            registrationEntityList = registrationRepository.findByYearEqualsAndMonthEquals(givenYear, givenMonth);
-        } else if (givenMonth != null && givenYear == null) {
-            Map<String, String> message = new HashMap<>();
-            message.put("error", "Bad Request");
-            message.put("message", "month parameter without year parameter is unacceptable.");
-            return message;
-        } else {
-            registrationEntityList = registrationRepository.findByYearEquals(givenYear);
+
+        if(driverId == null) {
+            if (givenMonth == null && givenYear == null) {
+                registrationEntityList = registrationRepository.findAll();
+            }
+            else if (givenMonth != null && givenYear != null) {
+                registrationEntityList = registrationRepository.findByYearEqualsAndMonthEquals(givenYear, givenMonth);
+            }
+            else if (givenMonth != null && givenYear == null) {
+                Map<String, String> message = new HashMap<>();
+                message.put("error", "Bad Request");
+                message.put("message", "month parameter without year parameter is unacceptable.");
+                return message;
+            }
+            else {
+                registrationEntityList = registrationRepository.findByYearEquals(givenYear);
+            }
+
+        }else{
+            if (givenMonth == null && givenYear == null) {
+                registrationEntityList = registrationRepository.findByDriverId(driverId);
+            } else if (givenMonth != null && givenYear != null) {
+                registrationEntityList = registrationRepository.findByYearEqualsAndMonthEqualsAndDriverIdEquals(givenYear, givenMonth,driverId);
+            } else if (givenMonth != null && givenYear == null) {
+                Map<String, String> message = new HashMap<>();
+                message.put("error", "Bad Request");
+                message.put("message", "month parameter without year parameter is unacceptable.");
+                return message;
+            } else {
+                registrationEntityList = registrationRepository.findByYearEqualsAndDriverIdEquals(givenYear,driverId);
+            }
         }
+
         Map<Integer, List<RegistrationEntity>> groupByYear = registrationEntityList.stream().collect(Collectors.groupingBy(w -> w.getYear()));
         List<Object> responseListObject = new ArrayList<>();
         for (Integer year : groupByYear.keySet()) {
