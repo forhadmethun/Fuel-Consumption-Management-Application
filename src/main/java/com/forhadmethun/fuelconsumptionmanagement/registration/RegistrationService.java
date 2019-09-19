@@ -19,7 +19,7 @@ public class RegistrationService {
         return RegistrationUtility.getRegistrationDTOListFromRegistrationEntityList(registrationRepository.findAll());
     }
 
-    public Map<String, String> createNewRegistration(List<RegistrationDTO> registrationDTOS) {
+    public Map<String, String> createFuelRegistration(List<RegistrationDTO> registrationDTOS) {
         Map<String, String> message = new HashMap<String, String>();
         if (!RegistrationUtility.validate(registrationDTOS, message)) {
             return message;
@@ -34,7 +34,7 @@ public class RegistrationService {
     }
 
 
-    public Object getFuelRegistrationDataByMonth(JSONObject data) {
+    public Object getFuelConsumptionRecord(JSONObject data) {
 
         Integer givenYear = (Integer) data.get("year");
         Integer givenMonth = (Integer) data.get("month");
@@ -62,10 +62,10 @@ public class RegistrationService {
             Map<String, Object> yearData = new HashMap<>();
             List<Object> monthlyCostList = new ArrayList<>();
             Map<Integer, List<RegistrationEntity>> groupByMonthData = groupByYear.get(year).stream().collect(Collectors.groupingBy(m -> m.getMonth()));
-            Map<String, Object> modifiedGroupByMonthData = new HashMap<>();
             List<Object> monthlyDataList = new ArrayList<>();
             for (Integer month : groupByMonthData.keySet()) {
                 {
+                    Map<String, Object> modifiedGroupByMonthData = new HashMap<>();
                     List<RegistrationEntity> registrationEntities = groupByMonthData.get(month);
                     modifiedGroupByMonthData.put("month", RegistrationUtility.getMonth(month));
                     modifiedGroupByMonthData.put("data", RegistrationUtility.getRegistrationDTOListFromRegistrationEntityList(registrationEntities));
@@ -82,7 +82,7 @@ public class RegistrationService {
     }
 
 
-    public Object getFuelRegistrationStatistics(JSONObject data) {
+    public Object getFuelConsumptionStatistics(JSONObject data) {
 
         Integer givenYear = (Integer) data.get("year");
         Integer givenMonth = (Integer) data.get("month");
@@ -152,7 +152,7 @@ public class RegistrationService {
         return responseListObject;
     }
 
-    public Object getAllR(JSONObject data) {
+    public Object getTotalSpentAmount(JSONObject data) {
 
         Integer givenYear = (Integer) data.get("year");
         List<RegistrationEntity> registrationEntityList = null;

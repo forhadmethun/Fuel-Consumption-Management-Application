@@ -5,6 +5,89 @@ import java.util.List;
 import java.util.Map;
 
 public class RegistrationUtility {
+    public static final String GET_TOTAL_SPENT_AMOUNT_API_REQUEST = "<b>1. Total spent amount of money grouped by month.</b><br/>" +
+            "If you want data for all of the year then the json request format should be an empty json object like : " +
+            "<pre> " +
+            "{}" +
+            "</pre> <br/>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://link-to-deployed-domain-url/get-total-spent-amount\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{}\""+
+            "</pre><br/>"+
+            "If you want to get data for specific year" +
+            "then the request format should be like:" +
+            "<pre>" +
+            " {\"year\": 2017}" +
+            "</pre>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://localhost:8081/get-total-spent-amount\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{\\\"year\\\": 2017}\""+
+            "</pre><br/>"+
+            "";
+
+    public static final String GET_SPECIFIED_MONTH_FUEL_CONSUMPTION_API_REQUEST = "<b>2. List fuel consumption records for specified month (each row should contain: fuel type, volume, date, price, total price, driver ID)..</b><br/>" +
+            "This is a generic API. You can get response for (i) all the data or (ii) specified year data or (iii) specific month of specific year data" +
+            "If you want data for all of the year then the json request format should be an empty json object like : " +
+            "<pre> " +
+            "{}" +
+            "</pre> <br/>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://link-to-deployed-domain-url/get-fuel-consumption-record\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{}\""+
+            "</pre><br/>"+
+            "If you want to get data for specific year" +
+            "then the request format should be like:" +
+            "<pre>" +
+            " {\"year\": 2017}" +
+            "</pre>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://localhost:8081/get-fuel-consumption-record\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{\\\"year\\\": 2017}\""+
+            "</pre><br/>"+
+
+            "If you want to get data for specific month of specific year " +
+            "then the request format should be like:" +
+            "<pre>" +
+            " {\"year\": 2017, \"month\": 1}" +
+            "</pre>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://localhost:8081/get-fuel-consumption-record\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{ \\\"year\\\" : 2017, \\\"month\\\" : 1}\""+
+            "</pre><br/>"+
+            "";
+
+
+    public static final String GET_FUEL_CONSUMPTION_STAT_API_REQUEST = "<b>3. Statistics for each month, list fuel consumption records grouped by fuel type (each row should contain: fuel type, volume, average price, total price).</b><br/>" +
+            "This is a generic API. You can get response for (i) all the data or (ii) specified year data or (iii) specific month of specific year data" +
+            "If you want data for all of the year then the json request format should be an empty json object like : " +
+            "<pre> " +
+            "{}" +
+            "</pre> <br/>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://link-to-deployed-domain-url/get-fuel-consumption-statistics\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{}\""+
+            "</pre><br/>"+
+            "If you want to get data for specific year" +
+            "then the request format should be like:" +
+            "<pre>" +
+            " {\"year\": 2017}" +
+            "</pre>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://localhost:8081/get-fuel-consumption-statistics\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{\\\"year\\\": 2017}\""+
+            "</pre><br/>"+
+
+            "If you want to get data for specific month of specific year " +
+            "then the request format should be like:" +
+            "<pre>" +
+            " {\"year\": 2017, \"month\": 1}" +
+            "</pre>" +
+            "Curl Command:" +
+            "<pre>"+
+            "curl -X POST \"http://localhost:8081/get-fuel-consumption-statistics\" -H \"accept: */*\" -H \"Content-Type: application/json\" -d \"{ \\\"year\\\" : 2017, \\\"month\\\" : 1}\""+
+            "</pre><br/>"+
+            "";
+
     public static Boolean validate(List<RegistrationDTO> registrationDTOS, Map<String, String> message){
         for(RegistrationDTO registrationDTO: registrationDTOS){
             if(registrationDTO.getFuelType() == null){

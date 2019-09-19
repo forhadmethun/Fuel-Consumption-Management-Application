@@ -1,3 +1,4 @@
+/*
 package com.forhadmethun.fuelconsumptionmanagement;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ViewController {
     @RequestMapping(value = {"/"},method = RequestMethod.GET)
     public ModelAndView getDashboard(){
-        return  new ModelAndView("welcome");
+        return new ModelAndView("welcome");
     }
 }
+*/
